@@ -1,0 +1,12 @@
+# node js dependencies
+node_modules/
+coverage/
+
+# lock dependence
+package-lock.json
+
+# distribution directories
+dist/
+
+#Desktop service store
+.DS_Store

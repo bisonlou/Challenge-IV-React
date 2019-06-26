@@ -1,0 +1,19 @@
+//auth
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
+export const LOGIN_FAILURE = "LOGIN_FAILURE"
+export const LOGIN_START = "LOGIN_START"
+export const SIGNUP_START = "SIGNUP_START"
+export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS"
+export const SIGNUP_FAILURE = "SIGNUP_FAILURE"
+
+// redflags
+export const GET_RED_FLAGS = "GET_RED_FLAGS"
+
+// interventions
+export const GET_INTERVENTIONS = "GET_INTERVENTIONS"
+
+// incidents
+export const POST_INCIDENT_START = "POST_INCIDENT_START"
+export const POST_INCIDENT_SUCCESS = "POST_INCIDENT_SUCCESS"
+export const POST_INCIDENT_FAILURE = "POST_INCIDENT_FAILURE"
+export const GET_INCIDENT_TOTALS = "GET_INCIDENT_TOTALS"
