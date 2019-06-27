@@ -1,0 +1,3 @@
+[![Build Status](https://travis-ci.com/bisonlou/Challenge-IV-React.svg?branch=develop)](https://travis-ci.com/bisonlou/Challenge-IV-React) 
+[![Maintainability](https://api.codeclimate.com/v1/badges/381012fae747b0083ee7/maintainability)](https://codeclimate.com/github/bisonlou/Challenge-IV-React/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/381012fae747b0083ee7/test_coverage)](https://codeclimate.com/github/bisonlou/Challenge-IV-React/test_coverage)
