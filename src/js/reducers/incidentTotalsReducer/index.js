@@ -1,6 +1,6 @@
 import {
   GET_INCIDENT_TOTALS,
-} from '../actions/types'
+} from '../../actions/types';
 
 const initialState = {
   redflagTotals: {

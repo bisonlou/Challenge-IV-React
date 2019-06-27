@@ -2,7 +2,7 @@ import {
   POST_INCIDENT_START,
   POST_INCIDENT_FAILURE,
   POST_INCIDENT_SUCCESS,
-} from '../actions/types'
+} from '../../actions/types';
 
 const initialState = {
   title: '',
