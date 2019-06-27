@@ -52,7 +52,7 @@ class Landing extends Component {
                     </div>
                     <div className="signup">
                         <button id="btn-start" onClick={this.redirect}>
-                            Get Started
+                            Sign up
                     </button>
                     </div>
                 </div>
