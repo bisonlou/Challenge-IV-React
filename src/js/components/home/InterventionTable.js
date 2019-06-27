@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import history from '../../../history';
 import FormatDate from '../../utilities';
 import getInterventionAction from '../../actions/interventionActions';
 import '../../../css/style.css';
@@ -10,7 +10,18 @@ import '../../../css/style.css';
 class InterventionTable extends Component {
     constructor(props) {
         super(props);
+
+        this.handleClick = this.handleClick.bind(this);
     };
+
+    handleClick(e) {
+        e.preventDefault()
+        history.push({
+            pathname: '/incident',
+            state: { type: 'intervention' }
+        })
+        console.log(this.props);
+    }
 
     componentWillMount() {
         const { getInterventionAction } = this.props;
@@ -23,15 +34,10 @@ class InterventionTable extends Component {
 
                 <label className="table-header intervention">
                     My interventions
-                    <Link
-                        type="submit"clear
+                    <div
+                        onClick={this.handleClick}
+                        role="button"
                         className="button-add"
-                        to={{
-                            pathname: '/incident',
-                            state: {
-                                type: 'intervention'
-                            }
-                        }}
                     />
                 </label>
 

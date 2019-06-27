@@ -1,11 +1,17 @@
+// react
 import React, { Component } from 'react';
+
+// third party libraries
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+
+// styles
 import '../../css/style.css';
 
 class Navbar extends Component {
-
     render() {
-        let username = this.props.username
+        const { username } = this.props
+        console.log('username', username)
         return (
             <div className="nav-bar">
                 <header>
@@ -20,9 +26,13 @@ class Navbar extends Component {
                                 }</a></li> : null
                             }
 
-                            <li id="sign-out"><Link to="/login">{
-                                username ? "sign out" : "sign in"
-                            }</Link></li>
+                            <li id="sign-out">
+                                <Link to="/login">
+                                    {
+                                        username ? "sign out" : "sign in"
+                                    }
+                                </Link>
+                            </li>
                         </ul>
                     </nav>
                 </header>
@@ -33,4 +43,6 @@ class Navbar extends Component {
 
 }
 
-export default Navbar;
+const mapStateToProps = state => state.authReducer;
+
+export default connect(mapStateToProps, null)(Navbar);

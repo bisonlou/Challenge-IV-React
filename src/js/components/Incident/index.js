@@ -1,8 +1,14 @@
+// react libraries
 import React, { Component } from 'react';
+
+// third party libraries
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import ReactQuill from 'react-quill';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+
+// components
+import Loader from '../Loader';
 import NavBar from '../Navbar';
 import { postIncident } from '../../actions/incidentActions';
 
@@ -42,14 +48,22 @@ class Incident extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const { postIncident } = this.props;
- 
+
     postIncident(this.state);
   };
 
   render() {
     const { title, comment, location } = this.state;
+    const { isLoading, isIncidentPosted } = this.props;
+
     return (
       <div>
+        {
+          isLoading && <Loader />
+        }
+        {
+          isIncidentPosted && this.props.history.push("/home")
+        }
         <NavBar />
         <div className="container">
           <div className="alert-box" id="alert-box">
@@ -74,7 +88,7 @@ class Incident extends Component {
                 name="comment"
                 value={comment}
                 onChange={this.handleQuillChange}
-                />
+              />
 
               <input
                 type="text"
@@ -131,4 +145,4 @@ Incident.propTypes = {
 }
 
 
-export default connect(mapStateToProps, {postIncident})(Incident);
+export default connect(mapStateToProps, { postIncident })(Incident);

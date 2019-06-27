@@ -1,11 +1,18 @@
+// react
 import React, { Component } from 'react';
+
+// third-party libraries
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ListErrors from '../ListErrors';
 import Navbar from '../Navbar';
 import Loader from '../Loader';
+
+// action creators
 import { bindActionCreators } from 'redux';
 import { signupAction } from '../../actions/signupActions';
+
+// styles
 import '../../../css/style.css'
 
 class SignUp extends Component {
@@ -56,19 +63,15 @@ class SignUp extends Component {
     render() {
         const { password, confirmPassword, email, username, phonenumber, firstname, lastname, othernames } = this.state.user;
         const { isPasswordMatchError } = this.state;
-        const { errors, isSignedUp, isLoading, isSignupFailed } = this.props;
-        
+        const { errors, isLoggedIn, isLoading, isLoginFailed } = this.props;
+
         return (
             <div>
                 {
                     isLoading ? <Loader /> : null
                 }
                 {
-                    isSignedUp ? <Redirect to={{
-                        pathname: '/home',
-                        state: { username: username }
-                    }} />
-                        : null
+                   isLoggedIn ? <Redirect to='/home' /> : null
                 }
                 <Navbar />
                 <div className="container">
@@ -77,7 +80,11 @@ class SignUp extends Component {
                             <p>Sign Up</p>
                         </div>
                         <div className="right-panel">
-                            {isSignupFailed && errors && <ListErrors errors={errors} />
+                            {
+                                isLoading ? <Loader /> : null
+                            }
+                            {
+                                isLoginFailed && errors && <ListErrors errors={errors} />
                             }
                             <label className="error-label" id="username-error"></label>
                             <input type="text" placeholder="Username" name="username" value={username} id="username" onChange={this.handleChange} required />
@@ -122,7 +129,7 @@ class SignUp extends Component {
 
 }
 
-const mapStateToProps = state => state.signupReducer;
+const mapStateToProps = state => state.authReducer;
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     onSubmit: user => signupAction(user),
