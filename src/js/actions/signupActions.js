@@ -1,27 +1,27 @@
 import axios from 'axios';
 import {
-    SIGNUP_SUCCESS,
-    SIGNUP_FAILURE,
-    SIGNUP_START,
+    LOGIN_START,
+    LOGIN_SUCCESS,
+    LOGIN_FAILURE
 } from './types'
 import { BASE_URL, setCookie, getHeaders } from '../utilities';
 
 /*
 * action to signal the start of a SIGNUP action
 */
-const startSignup = () => ({ type: SIGNUP_START });
+const startSignup = () => ({ type: LOGIN_START });
 
 /**
 * action to login in a user
 * @param username string
 */
-const signup = username => ({ type: SIGNUP_SUCCESS, username });
+const signup = username => ({ type: LOGIN_SUCCESS, username });
 
 /**
 * action to show login failure
-* @param erros array
+* @param errors array
 */
-const signupFailed = errors => ({ type: SIGNUP_FAILURE, errors });
+const signupFailed = errors => ({ type: LOGIN_FAILURE, errors });
 
 /** 
 * signup action creator

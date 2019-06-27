@@ -78,6 +78,7 @@ header ul{
 
 header ul li{
     display: inline;
+    margin-right: 10px;
 }
 
 header ul li a{    

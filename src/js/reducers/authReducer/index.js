@@ -2,7 +2,7 @@ import {
     LOGIN_START,
     LOGIN_FAILURE,
     LOGIN_SUCCESS,
-} from '../actions/types'
+} from '../../actions/types'
 
 const initialState = {
     username: '',

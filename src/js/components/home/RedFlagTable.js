@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import history from '../../../history';
 import PropTypes from 'prop-types';
 import getRedFlagsAction from '../../actions/redFlagsActions';
 import FormatDate from '../../utilities';
@@ -11,6 +11,16 @@ class RedFlagTable extends Component {
     constructor(props) {
         super(props);
 
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(e) {
+        e.preventDefault()
+        history.push({
+            pathname: '/incident',
+            state: { type: 'red-flag' }
+        })
+        console.log(this.props);
     }
 
     componentWillMount() {
@@ -23,15 +33,10 @@ class RedFlagTable extends Component {
             <div className="redflag-table">
                 <label className="table-header red">
                     My red flags
-                    <Link
-                        type="submit"
+                    <div
+                        onClick={this.handleClick}
+                        role="button"
                         className="button-add"
-                        to={{
-                            pathname: '/incident',
-                            state: {
-                                type: 'red-flag'
-                            }
-                        }}
                     />
                 </label>
 

@@ -43,7 +43,7 @@ class Login extends Component {
     }
 
     render() {
-        const { username, errors, isLoggedIn, isLoading } = this.props;
+        const { errors, isLoggedIn, isLoading } = this.props;
         const { email, password } = this.state;
         return (
             <div>
@@ -51,11 +51,7 @@ class Login extends Component {
                     isLoading ? <Loader /> : null
                 }
                 {
-                    isLoggedIn ? <Redirect to={{
-                        pathname: '/home',
-                        state: { username: username }
-                    }} />
-                        : null
+                    isLoggedIn ? <Redirect to='/home' /> : null
                 }
                 <Navbar />
                 <div className="container">
@@ -81,7 +77,7 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = state => state.loginReducer;
+const mapStateToProps = state => state.authReducer;
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     onSubmit: (email, password) => loginAction(email, password)
