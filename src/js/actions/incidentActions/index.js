@@ -3,8 +3,8 @@ import {
     POST_INCIDENT_START,
     POST_INCIDENT_SUCCESS,
     POST_INCIDENT_FAILURE,
-} from './types'
-import { BASE_URL, getHeaders } from '../utilities';
+} from '../types'
+import { BASE_URL, getHeaders } from '../../utilities';
 
 /*
 * action to signal the start of an incident action
