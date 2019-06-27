@@ -2,7 +2,7 @@ import {
   SIGNUP_START,
   SIGNUP_FAILURE,
   SIGNUP_SUCCESS,
-} from '../actions/types'
+} from '../../actions/types';
 
 const initialState = {
   username: '',
