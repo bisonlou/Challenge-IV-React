@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Switch, Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 
 // components
-import Home from './home/Home';
+import Home from './Home/Index';
 import Login from './Login';
 import Landing from './Landing';
 import SignUp from './Signup';
@@ -13,13 +13,13 @@ class App extends Component {
     render() {
 
         return (
-            <switch>
-                <Route exact path="/" component={Landing} />
-                <Route path="/home" component={Home} />
-                <Route path="/login" component={Login} />
-                <Route path="/signup" component={SignUp} />
-                <Route path="/incident" component={Incident} />
-            </switch>
+            <BrowserRouter>
+                <Route exact path="/" render={props => <Landing {...props} />} />
+                <Route path="/home" render={props => <Home {...props} />} />
+                <Route path="/login" render={props => <Login {...props} />} />
+                <Route path="/signup" render={props => <SignUp {...props} />} />
+                <Route path="/incident" render={props => <Incident {...props} />} />
+            </BrowserRouter>
         )
     }
 }

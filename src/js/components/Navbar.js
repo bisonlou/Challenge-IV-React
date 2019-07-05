@@ -11,7 +11,7 @@ import '../../css/style.css';
 class Navbar extends Component {
     render() {
         const { username } = this.props
-        console.log('username', username)
+
         return (
             <div className="nav-bar">
                 <header>

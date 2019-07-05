@@ -62,7 +62,7 @@ class Incident extends Component {
           isLoading && <Loader />
         }
         {
-          isIncidentPosted && this.props.history.push("/home")
+          isIncidentPosted && <Redirect to="/home" />
         }
         <NavBar />
         <div className="container">

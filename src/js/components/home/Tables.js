@@ -4,12 +4,12 @@ import InterventionTable from './InterventionTable'
 import '../../../css/style.css';
 
 
-const Tables = () => {
+const Tables = props => {
     return (
         <div className="container">
             <div className="tables">
-                <RedFlagTable />
-                <InterventionTable ß/>
+                <RedFlagTable {...props} />
+                <InterventionTable {...props} />
             </div>
         </div>
     );

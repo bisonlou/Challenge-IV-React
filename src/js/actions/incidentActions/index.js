@@ -3,6 +3,7 @@ import {
     POST_INCIDENT_START,
     POST_INCIDENT_SUCCESS,
     POST_INCIDENT_FAILURE,
+    RESET_ISINCIDENT_POSTED
 } from '../types'
 import { BASE_URL, getHeaders } from '../../utilities';
 
@@ -22,6 +23,11 @@ const postIncindentSuccess = incident => ({ type: POST_INCIDENT_SUCCESS, inciden
 * @param erros array
 */
 const postIncidentFailed = errors => ({ type: POST_INCIDENT_FAILURE, errors });
+
+/**
+ * resets the state's isIncidentPosted flag
+ */
+ export const resetIsIncidentPosted = () => ({ type: RESET_ISINCIDENT_POSTED });
 
 /** 
 * post incident action creator

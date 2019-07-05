@@ -2,6 +2,7 @@ import {
   POST_INCIDENT_START,
   POST_INCIDENT_FAILURE,
   POST_INCIDENT_SUCCESS,
+  RESET_ISINCIDENT_POSTED,
 } from '../../actions/types';
 
 const initialState = {
@@ -40,6 +41,12 @@ const incidentReducer = (state = initialState, action) => {
               isIncidentPostingFailed: true,
               errors: action.errors,
           };
+
+      case RESET_ISINCIDENT_POSTED:
+        return {
+          ...state,
+          isIncidentPosted: false,
+        };
 
       default:
           return state;

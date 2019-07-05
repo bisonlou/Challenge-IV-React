@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import history from '../../../history';
 import PropTypes from 'prop-types';
 import getRedFlagsAction from '../../actions/redFlagsActions';
 import FormatDate from '../../utilities';
@@ -16,11 +15,10 @@ class RedFlagTable extends Component {
 
     handleClick(e) {
         e.preventDefault()
-        history.push({
+        this.props.history.push({
             pathname: '/incident',
             state: { type: 'red-flag' }
         })
-        console.log(this.props);
     }
 
     componentWillMount() {
