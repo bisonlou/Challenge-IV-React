@@ -1,6 +1,6 @@
 export const BASE_URL = 'https://bisonlou.herokuapp.com/api/v1/';
 
-export const formatDate = (rawDate) => {
+const formatDate = (rawDate) => {
   const longDateTime = new Date(rawDate);
 
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -16,18 +16,18 @@ export const formatDate = (rawDate) => {
   }
 
   return `${day} ${date} ${month} ${year}`;
-}
+};
 
 export const getHeaders = () => ({
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': document.cookie
+    Authorization: document.cookie,
   }
 });
 
-export const setCookie = token => {
-  let bearer_token = "Bearer " + token + ";";
-  document.cookie = "token=" + bearer_token;
+export const setCookie = (token) => {
+  const bearer_token = `${'Bearer '}${token};`;
+  document.cookie = `token=${bearer_token}`;
 };
 
 export default formatDate;

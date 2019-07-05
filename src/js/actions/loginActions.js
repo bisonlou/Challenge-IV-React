@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {
-    LOGIN_SUCCESS,
-    LOGIN_FAILURE,
-    LOGIN_START,
-} from './types'
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGIN_START,
+} from './types';
 import { BASE_URL, setCookie, getHeaders } from '../utilities';
 
 /*
@@ -23,27 +23,26 @@ const login = username => ({ type: LOGIN_SUCCESS, username });
 */
 const loginFailed = errors => ({ type: LOGIN_FAILURE, errors });
 
-/** 
+/**
 * login action creator
 * @param {string}  email of the uer
 * @param {string}  passsword of the user
-**/
-export function loginAction(email, password) {
-    return dispatch => {
+* */
+const loginAction = (email, password) => (dispatch) => {
+  dispatch(startLogin());
 
-        dispatch(startLogin());
+  const url = `${BASE_URL}${'auth/login'}`;
+  const body = {
+    email,
+    password
+  };
 
-        const url = `${BASE_URL}${'auth/login'}`;
-        const body = {
-            'email': email,
-            'password': password
-        };
-
-        return axios.post(url, body, getHeaders)
-            .then(({ data: { data: data } }) => {
-                setCookie(data[0]['access_token']);
-                return dispatch(login(data[0]['user']['username']))
-            })
-            .catch (data => dispatch(loginFailed(data.response.data.errors)));
-    }
+  return axios.post(url, body, getHeaders)
+    .then(({ data: { data } }) => {
+      setCookie(data[0].access_token);
+      return dispatch(login(data[0].user.username));
+    })
+    .catch(data => dispatch(loginFailed(data.response.data.errors)));
 };
+
+export default loginAction;

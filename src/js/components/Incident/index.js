@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 
 // third party libraries
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ReactQuill from 'react-quill';
-import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 // components
@@ -24,31 +24,28 @@ class Incident extends Component {
       lng: 0.000000,
       type: '',
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleQuillChange = this.handleQuillChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    const { type } = this.props.location.state;
-    this.setState({ type })
+    const { location: { state: type } } = this.props;
+    this.setState({ type });
   }
 
-  handleChange(e) {
-    e.preventDefault()
+  handleChange = (e) => {
+    e.preventDefault();
+
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
 
-  handleQuillChange(value) {
-    this.setState({ comment: value })
-  }
+  handleQuillChange = (value) => {
+    this.setState({ comment: value });
+  };
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
-    const { postIncident } = this.props;
 
+    const { postIncident } = this.props;
     postIncident(this.state);
   };
 
@@ -69,8 +66,7 @@ class Incident extends Component {
           <div className="alert-box" id="alert-box">
             <p>Red flag created succesfully</p>
           </div>
-          <div className="error-box" id="error-box">
-          </div>
+          <div className="error-box" id="error-box" />
           <div className="flag-box">
             <div className="left">
 
@@ -112,8 +108,7 @@ class Incident extends Component {
               />
 
               <div className="media-table">
-                <table id="images-table">
-                </table>
+                <table id="images-table" />
               </div>
 
               <p>Video evidence</p>
@@ -142,7 +137,19 @@ const mapStateToProps = state => state.incidentReducer;
 
 Incident.propTypes = {
   postIncident: PropTypes.func,
-}
+  isLoading: PropTypes.bool,
+  isIncidentPosted: PropTypes.bool,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      type: PropTypes.string
+    })
+  }).isRequired,
+};
 
+Incident.defaultProps = {
+  postIncident: () => {},
+  isLoading: false,
+  isIncidentPosted: false,
+};
 
 export default connect(mapStateToProps, { postIncident })(Incident);

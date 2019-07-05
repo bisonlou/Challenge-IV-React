@@ -1,6 +1,6 @@
 import {
   GET_INCIDENT_TOTALS,
-} from '../../actions/types'
+} from '../../actions/types';
 
 import incidentTotalsReducer from '.';
 
@@ -27,7 +27,7 @@ describe('Incident Totals Reducer', () => {
         total: 0,
       }
     };
-    
+
     const newState = incidentTotalsReducer(undefined, { type: GET_INCIDENT_TOTALS, payload });
     expect(newState.redflagTotals.pending).toBe(10);
     expect(newState.redflagTotals.resolved).toBe(0);

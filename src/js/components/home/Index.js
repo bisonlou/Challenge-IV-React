@@ -9,30 +9,43 @@ import PropTypes from 'prop-types';
 import Navbar from '../Navbar';
 import HomeGraphs from './HomeGraphs';
 import Tables from './Tables';
-import { resetIsIncidentPosted } from '../../actions/incidentActions'
+import {
+  resetIsIncidentPosted,
+  resetIsIncidentDeleted
+} from '../../actions/incidentActions';
 
 class Home extends Component {
-    componentDidMount() {
-        const { resetIsIncidentPosted } = this.props;
-        console.log(this.props);
-        resetIsIncidentPosted();
-    }
+  componentDidMount() {
+    const {
+      resetIsIncidentPosted,
+      resetIsIncidentDeleted
+    } = this.props;
 
-    render() {
-        return (
-            <div>
-                <Navbar {...this.props} />
-                <HomeGraphs {...this.props} />
-                <Tables {...this.props} />
-            </div >
-        )
-    }
+    resetIsIncidentPosted();
+    resetIsIncidentDeleted();
+  }
+
+  render() {
+    return (
+      <div>
+        <Navbar {...this.props} />
+        <HomeGraphs {...this.props} />
+        <Tables {...this.props} />
+      </div>
+    );
+  }
 }
 
 Home.propTypes = {
-    resetIsIncidentPosted: PropTypes.func,
-}
+  resetIsIncidentPosted: PropTypes.func,
+  resetIsIncidentDeleted: PropTypes.func,
+};
+
+Home.defaultProps = {
+  resetIsIncidentPosted: () => { },
+  resetIsIncidentDeleted: () => { },
+};
 
 const mapStateToProps = states => states.incidentReducer;
 
-export default connect(mapStateToProps, { resetIsIncidentPosted })(Home);
+export default connect(mapStateToProps, { resetIsIncidentPosted, resetIsIncidentDeleted })(Home);

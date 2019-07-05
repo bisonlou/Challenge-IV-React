@@ -1,15 +1,22 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import '../../../css/style.css';
 
 const TableHeader = (props) => {
-    return (
-        <label className={props.class}>
-            {props.title}
-            <button type="submit" className="button-add" onClick={props.onClick}></button>
-        </label>
+  const { className, title, onClick } = props;
 
-    );
-}
+  return (
+    <label className={className}>
+      {title}
+      <button type="submit" className="button-add" onClick={onClick} />
+    </label>
+  );
+};
+
+TableHeader.propTypes = {
+  className: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default TableHeader;
-
