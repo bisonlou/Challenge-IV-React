@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 
 // third party libraries
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ReactQuill from 'react-quill';
-import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 // components
@@ -32,7 +32,7 @@ class Incident extends Component {
 
   componentDidMount() {
     const { type } = this.props.location.state;
-    this.setState({ type })
+    this.setState({ type });
   }
 
   handleChange(e) {
@@ -69,8 +69,7 @@ class Incident extends Component {
           <div className="alert-box" id="alert-box">
             <p>Red flag created succesfully</p>
           </div>
-          <div className="error-box" id="error-box">
-          </div>
+          <div className="error-box" id="error-box" />
           <div className="flag-box">
             <div className="left">
 
@@ -112,8 +111,7 @@ class Incident extends Component {
               />
 
               <div className="media-table">
-                <table id="images-table">
-                </table>
+                <table id="images-table" />
               </div>
 
               <p>Video evidence</p>
@@ -142,7 +140,14 @@ const mapStateToProps = state => state.incidentReducer;
 
 Incident.propTypes = {
   postIncident: PropTypes.func,
-}
+  isLoading: PropTypes.bool,
+  isIncidentPosted: PropTypes.bool,
+};
 
+Incident.defaultProps = {
+  postIncident: () => {},
+  isLoading: false,
+  isIncidentPosted: false,
+};
 
 export default connect(mapStateToProps, { postIncident })(Incident);

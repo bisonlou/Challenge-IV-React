@@ -18,38 +18,38 @@ const initialState = {
 
 const incidentReducer = (state = initialState, action) => {
   switch (action.type) {
-      case POST_INCIDENT_START:
-          return {
-              ...state,
-              isLoading: true,
-          };
-          
-      case POST_INCIDENT_SUCCESS:
-          return {
-              ...state,
-              isIncidentPosted: true,
-              isLoading: false,
-              isIncidentPostingFailed: false,
-              errors: [],
-              };
+    case POST_INCIDENT_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
 
-      case POST_INCIDENT_FAILURE:
-          return {
-              ...state,
-              isLoading: false,
-              isIncidentPosted: false,
-              isIncidentPostingFailed: true,
-              errors: action.errors,
-          };
+    case POST_INCIDENT_SUCCESS:
+      return {
+        ...state,
+        isIncidentPosted: true,
+        isLoading: false,
+        isIncidentPostingFailed: false,
+        errors: [],
+      };
 
-      case RESET_ISINCIDENT_POSTED:
-        return {
-          ...state,
-          isIncidentPosted: false,
-        };
+    case POST_INCIDENT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isIncidentPosted: false,
+        isIncidentPostingFailed: true,
+        errors: action.errors,
+      };
 
-      default:
-          return state;
+    case RESET_ISINCIDENT_POSTED:
+      return {
+        ...state,
+        isIncidentPosted: false,
+      };
+
+    default:
+      return state;
   }
 };
 

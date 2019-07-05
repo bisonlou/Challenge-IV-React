@@ -6,11 +6,11 @@ import incidentReducer from './incidentReducer';
 import incidentTotalsReducer from './incidentTotalsReducer';
 
 const rootReducer = combineReducers({
-    authReducer,
-    incidentReducer,
-    incidentTotalsReducer,
-    redFlags,
-    interventions,
+  authReducer,
+  incidentReducer,
+  incidentTotalsReducer,
+  redFlags,
+  interventions,
 });
 
 export default rootReducer;
