@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import history from '../../../history';
 import FormatDate from '../../utilities';
 import getInterventionAction from '../../actions/interventionActions';
 import '../../../css/style.css';
@@ -16,11 +15,10 @@ class InterventionTable extends Component {
 
     handleClick(e) {
         e.preventDefault()
-        history.push({
+        this.props.history.push({
             pathname: '/incident',
             state: { type: 'intervention' }
         })
-        console.log(this.props);
     }
 
     componentWillMount() {
