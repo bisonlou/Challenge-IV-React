@@ -223,6 +223,11 @@ table a:hover{
     height: 150px;
 }
 
+#disabled-link {
+    pointer-events: none;
+    color: grey;
+}
+
 #location {
     margin-top: 50px;
 }

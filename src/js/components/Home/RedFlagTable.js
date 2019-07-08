@@ -63,18 +63,27 @@ class RedFlagTable extends Component {
                   <td>{r.title}</td>
                   <td>{r.status}</td>
                   <td>
-                    <Link to="/edit">Edit </Link>
+                    {
+                      r.status !== 'pending'
+                        ? <Link to="/edit" id="disabled-link">Edit </Link>
+                        : <Link to="/edit">Edit </Link>
+                    }
                     {' | '}
-                    <Link to={{
-                      pathname: '/confirm_delete',
-                      state: {
-                        incidentId: r.id
-                      }
-                    }}
-                    >
-                      Delete
-                    </Link>
-
+                    {
+                      r.status !== 'pending'
+                        ? <Link to="/confirm_delete" id="disabled-link">Delete </Link>
+                        : (
+                          <Link to={{
+                            pathname: '/confirm_delete',
+                            state: {
+                              incidentId: r.id
+                            }
+                          }}
+                          >
+                          Delete
+                          </Link>
+                        )
+                    }
                   </td>
                 </tr>
               ))
@@ -101,7 +110,7 @@ RedFlagTable.propTypes = {
 };
 
 RedFlagTable.defaultProps = {
-  getRedFlagsAction: () => {},
+  getRedFlagsAction: () => { },
   redFlags: [{
     id: 0,
     title: '',

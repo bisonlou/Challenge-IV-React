@@ -63,17 +63,27 @@ class InterventionTable extends Component {
                   <td>{i.title}</td>
                   <td>{i.status}</td>
                   <td>
-                    <Link to="/edit">Edit </Link>
+                    {
+                      i.status !== 'pending'
+                        ? <Link to="/edit" id="disabled-link">Edit </Link>
+                        : <Link to="/edit">Edit </Link>
+                    }
                     {' | '}
-                    <Link to={{
-                      pathname: '/confirm_delete',
-                      state: {
-                        incidentId: i.id
-                      }
-                    }}
-                    >
-                      Delete
-                    </Link>
+                    {
+                      i.status !== 'pending'
+                        ? <Link to="/confirm_delete" id="disabled-link">Delete </Link>
+                        : (
+                          <Link to={{
+                            pathname: '/confirm_delete',
+                            state: {
+                              incidentId: i.id
+                            }
+                          }}
+                          >
+                            Delete
+                          </Link>
+                        )
+                    }
                   </td>
                 </tr>
               ))
