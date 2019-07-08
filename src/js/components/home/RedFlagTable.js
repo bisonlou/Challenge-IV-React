@@ -1,76 +1,114 @@
+// react
 import React, { Component } from 'react';
+
+// third party components
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+// components
 import getRedFlagsAction from '../../actions/redFlagsActions';
+
+// styles
 import FormatDate from '../../utilities';
-import '../../../css/style.css';
 
 
 class RedFlagTable extends Component {
-    constructor(props) {
-        super(props);
+  componentWillMount() {
+    const { getRedFlagsAction } = this.props;
+    getRedFlagsAction();
+  }
 
-        this.handleClick = this.handleClick.bind(this);
-    }
+  handleClick(e) {
+    e.preventDefault();
 
-    handleClick(e) {
-        e.preventDefault()
-        this.props.history.push({
-            pathname: '/incident',
-            state: { type: 'red-flag' }
-        })
-    }
+    const { history: push } = this.props;
+    push({
+      pathname: '/incident',
+      state: { type: 'red-flag' }
+    });
+  }
 
-    componentWillMount() {
-        const { getRedFlagsAction } = this.props;
-        getRedFlagsAction();
-    }
+  render() {
+    const { redFlags } = this.props;
+    return (
+      <div className="redflag-table">
+        <div className="table-header red">
+          My red flags
+          <div
+            onClick={this.handleClick}
+            onKeyPress={this.onKeyPress}
+            role="button"
+            className="button-add"
+            tabIndex="0"
+          />
+        </div>
 
-    render() {
-        return (
-            <div className="redflag-table">
-                <label className="table-header red">
-                    My red flags
-                    <div
-                        onClick={this.handleClick}
-                        role="button"
-                        className="button-add"
-                    />
-                </label>
+        <table id="redflag-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Status</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {
+              redFlags.map(r => (
+                <tr key={r.id}>
+                  <td>
+                    {FormatDate(r.createdon)}
+                  </td>
+                  <td>{r.title}</td>
+                  <td>{r.status}</td>
+                  <td>
+                    <Link to="/edit">Edit </Link>
+                    {' | '}
+                    <Link to={{
+                      pathname: '/confirm_delete',
+                      state: {
+                        incidentId: r.id
+                      }
+                    }}
+                    >
+                      Delete
+                    </Link>
 
-                <table id="redflag-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Title</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.props.redFlags.map(r => (
-                                <tr key={r.id}>
-                                    <td>
-                                        {FormatDate(r.createdon)}
-                                    </td>
-                                    <td>{r.title}</td>
-                                    <td>{r.status}</td>
-                                    <td><a href="" >Edit</a> | <a href="" >Delete</a></td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
-            </div>
-        )
-    }
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 }
 
 RedFlagTable.propTypes = {
-    getRedFlagsAction: PropTypes.func,
-}
+  getRedFlagsAction: PropTypes.func,
+  redFlags: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      Comment: PropTypes.string,
+    })
+  ),
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }).isRequired,
+};
+
+RedFlagTable.defaultProps = {
+  getRedFlagsAction: () => {},
+  redFlags: [{
+    id: 0,
+    title: '',
+    Comment: '',
+  }],
+};
 
 const mapStateToProps = state => state.redFlags;
 
-export default connect(mapStateToProps, { getRedFlagsAction })(RedFlagTable)
+export default connect(mapStateToProps, { getRedFlagsAction })(RedFlagTable);

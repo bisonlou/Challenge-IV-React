@@ -26,7 +26,7 @@ export const getHeaders = () => ({
 });
 
 export const setCookie = (token) => {
-  const bearer_token = `Bearer${token};`;
+  const bearer_token = `${'Bearer '}${token};`;
   document.cookie = `token=${bearer_token}`;
 };
 

@@ -12,7 +12,7 @@ import '../../../css/style.css';
 import Navbar from '../Navbar';
 import ListErrors from '../ListErrors';
 import Loader from '../Loader';
-import { loginAction } from '../../actions/loginActions';
+import loginAction from '../../actions/loginActions';
 
 
 class Login extends Component {
@@ -89,6 +89,7 @@ Login.propTypes = {
   errors: PropTypes.arrayOf(PropTypes.string).isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => state.authReducer;

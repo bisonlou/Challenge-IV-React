@@ -11,7 +11,7 @@ import Navbar from '../Navbar';
 import Loader from '../Loader';
 
 // action creators
-import { signupAction } from '../../actions/signupActions';
+import signupAction from '../../actions/signupActions';
 
 // styles
 import '../../../css/style.css';

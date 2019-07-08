@@ -24,31 +24,28 @@ class Incident extends Component {
       lng: 0.000000,
       type: '',
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleQuillChange = this.handleQuillChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    const { type } = this.props.location.state;
+    const { location: { state: type } } = this.props;
     this.setState({ type });
   }
 
-  handleChange(e) {
-    e.preventDefault()
+  handleChange = (e) => {
+    e.preventDefault();
+
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
 
-  handleQuillChange(value) {
-    this.setState({ comment: value })
-  }
+  handleQuillChange = (value) => {
+    this.setState({ comment: value });
+  };
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
-    const { postIncident } = this.props;
 
+    const { postIncident } = this.props;
     postIncident(this.state);
   };
 
@@ -142,6 +139,11 @@ Incident.propTypes = {
   postIncident: PropTypes.func,
   isLoading: PropTypes.bool,
   isIncidentPosted: PropTypes.bool,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      type: PropTypes.string
+    })
+  }).isRequired,
 };
 
 Incident.defaultProps = {

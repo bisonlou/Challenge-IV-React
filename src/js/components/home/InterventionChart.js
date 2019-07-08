@@ -73,13 +73,13 @@ InterventionChart.propTypes = {
 };
 
 InterventionChart.defaultProps = {
-  totals: PropTypes.shape({
+  totals: {
     pending: 0,
     rejected: 0,
     resolved: 0,
     investigation: 0,
     total: 0,
-  }),
+  },
 };
 
 export default InterventionChart;

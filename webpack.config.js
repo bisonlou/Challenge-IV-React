@@ -14,7 +14,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         }
       },
       {
@@ -36,8 +36,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      // filename: "./index.html"
+      template: './src/index.html',
     })
   ]
 };

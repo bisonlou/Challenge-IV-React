@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 // third party components
+import PropTypes from 'prop-types';
 
 // components
 import Navbar from '../Navbar';
@@ -14,7 +15,8 @@ class Landing extends Component {
 
   redirect(e) {
     e.preventDefault();
-    this.props.history.push('/signup');
+    const { history: { push } } = this.props;
+    push('/signup');
   }
 
   render() {
@@ -27,7 +29,10 @@ class Landing extends Component {
             <div className="left">
               <div className="landing-image" id="protest" />
               <div className="image-caption">
-                <p>Gone are the days when you have to make yourself audibly visible so as to garner attention</p>
+                <p>
+                  Gone are the days when you have to make yourself
+                   audibly visible so as to garner attention
+                </p>
               </div>
             </div>
 
@@ -69,5 +74,11 @@ class Landing extends Component {
     );
   }
 }
+
+Landing.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }).isRequired,
+};
 
 export default Landing;
