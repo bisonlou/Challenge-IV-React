@@ -66,7 +66,21 @@ class InterventionTable extends Component {
                     {
                       i.status !== 'pending'
                         ? <Link to="/edit" id="disabled-link">Edit </Link>
-                        : <Link to="/edit">Edit </Link>
+                        : (
+                          <Link to={{
+                            pathname: '/incident',
+                            state: {
+                              id: i.id,
+                              title: i.title,
+                              comment: i.comment,
+                              status: i.status,
+                              type: 'intervention',
+                            }
+                          }}
+                          >
+                            Edit
+                          </Link>
+                        )
                     }
                     {' | '}
                     {

@@ -7,6 +7,10 @@ import {
   DELETE_INCIDENT_FAILURE,
   DELETE_INCIDENT_SUCCESS,
   DELETE_INCIDENT_START,
+  UPDATE_INCIDENT_FAILURE,
+  UPDATE_INCIDENT_START,
+  UPDATE_INCIDENT_SUCCESS,
+  RESET_IS_INCIDENT_UPDATED,
 } from '../../actions/types';
 
 const initialState = {
@@ -16,9 +20,11 @@ const initialState = {
   lat: '',
   isLoading: false,
   isIncidentPosted: false,
+  isIncidentUpdated: false,
   isIncidentDeleted: false,
   isIncidentPostingFailed: false,
   isIncidentDeletionFailed: false,
+  isIncidentUpdateFailed: false,
   errors: []
 };
 
@@ -36,12 +42,27 @@ const incidentReducer = (state = initialState, action) => {
         isLoading: true,
       };
 
+    case UPDATE_INCIDENT_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
     case POST_INCIDENT_SUCCESS:
       return {
         ...state,
         isIncidentPosted: true,
         isLoading: false,
         isIncidentPostingFailed: false,
+        errors: [],
+      };
+
+    case UPDATE_INCIDENT_SUCCESS:
+      return {
+        ...state,
+        isIncidentUpdated: true,
+        isLoading: false,
+        isIncidentUpdateFailed: false,
         errors: [],
       };
 
@@ -63,6 +84,15 @@ const incidentReducer = (state = initialState, action) => {
         errors: action.errors,
       };
 
+    case UPDATE_INCIDENT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isIncidentUpdated: false,
+        isIncidentUpdateFailed: true,
+        errors: action.errors,
+      };
+
     case DELETE_INCIDENT_FAILURE:
       return {
         ...state,
@@ -76,6 +106,12 @@ const incidentReducer = (state = initialState, action) => {
       return {
         ...state,
         isIncidentPosted: false,
+      };
+
+    case RESET_IS_INCIDENT_UPDATED:
+      return {
+        ...state,
+        isIncidentUpdated: false,
       };
 
     case RESET_IS_INCIDENT_DELETED:

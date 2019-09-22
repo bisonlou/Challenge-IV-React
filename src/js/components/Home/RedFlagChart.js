@@ -25,7 +25,7 @@ const RedFlagChart = (props) => {
           id="pending-redflags"
           title="Pending"
           style={
-            { height: (pending * 100) / total }
+            { height: (pending * 100) / (total === 0 ? 1 : total) }
           }
         />
       </li>
@@ -35,7 +35,7 @@ const RedFlagChart = (props) => {
           id="investigation-redflags"
           title="Investigating"
           style={
-            { height: (investigation * 100) / total }
+            { height: (investigation * 100) / (total === 0 ? 1 : total) }
           }
         />
       </li>
@@ -45,7 +45,7 @@ const RedFlagChart = (props) => {
           id="resolved-redflags"
           title="Resolved"
           style={
-            { height: (resolved * 100) / total }
+            { height: (resolved * 100) / (total === 0 ? 1 : total) }
           }
         />
       </li>
@@ -55,7 +55,7 @@ const RedFlagChart = (props) => {
           id="rejected-redflags"
           title="Rejected"
           style={
-            { height: (rejected * 100) / total }
+            { height: (rejected * 100) / (total === 0 ? 1 : total) }
           }
         />
       </li>
@@ -65,23 +65,12 @@ const RedFlagChart = (props) => {
 
 RedFlagChart.propTypes = {
   totals: PropTypes.shape({
-    pending: PropTypes.number,
-    rejected: PropTypes.number,
-    resolved: PropTypes.number,
-    investigation: PropTypes.number,
-    total: PropTypes.number,
-  }),
+    pending: PropTypes.number.isRequired,
+    rejected: PropTypes.number.isRequired,
+    resolved: PropTypes.number.isRequired,
+    investigation: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired,
+  }).isRequired,
 };
-
-RedFlagChart.defaultProps = {
-  totals: {
-    pending: 0,
-    rejected: 0,
-    resolved: 0,
-    investigation: 0,
-    total: 0,
-  }
-};
-
 
 export default RedFlagChart;

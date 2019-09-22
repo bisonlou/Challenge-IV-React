@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import getIncidentTotalsAction from '../../actions/incidentTotalsActions';
-import RedFlagCard from './RedFlagCard';
-import InterventionCard from './InterventionCard';
+import getIncidentTotalsAction from '../../../actions/incidentTotalsActions';
+import RedFlagCard from '../RedFlagCard';
+import InterventionCard from '../InterventionCard';
 
-import '../../../css/style.css';
+import '../../../../css/style.css';
 
 
-class Cards extends Component {
+export class Cards extends Component {
   componentDidMount() {
     const { getIncidentTotalsAction } = this.props;
     getIncidentTotalsAction();
@@ -30,40 +30,23 @@ class Cards extends Component {
 }
 
 Cards.propTypes = {
-  getIncidentTotalsAction: PropTypes.func,
+  getIncidentTotalsAction: PropTypes.func.isRequired,
   redflagTotals: PropTypes.shape({
     pending: PropTypes.number,
     rejected: PropTypes.number,
     resolved: PropTypes.number,
     investigation: PropTypes.number,
     total: PropTypes.number,
-  }),
+  }).isRequired,
   interventionTotals: PropTypes.shape({
     pending: PropTypes.number,
     rejected: PropTypes.number,
     resolved: PropTypes.number,
     investigation: PropTypes.number,
     total: PropTypes.number,
-  }),
+  }).isRequired,
 };
 
-Cards.defaultProps = {
-  getIncidentTotalsAction: () => {},
-  redflagTotals: PropTypes.shape({
-    pending: 0,
-    rejected: 0,
-    resolved: 0,
-    investigation: 0,
-    total: 0,
-  }),
-  interventionTotals: PropTypes.shape({
-    pending: 0,
-    rejected: 0,
-    resolved: 0,
-    investigation: 0,
-    total: 0,
-  }),
-};
 
 const mapStateToProps = state => state.incidentTotalsReducer;
 
