@@ -66,7 +66,21 @@ class RedFlagTable extends Component {
                     {
                       r.status !== 'pending'
                         ? <Link to="/edit" id="disabled-link">Edit </Link>
-                        : <Link to="/edit">Edit </Link>
+                        : (
+                          <Link to={{
+                            pathname: '/incident',
+                            state: {
+                              id: r.id,
+                              title: r.title,
+                              comment: r.comment,
+                              status: r.status,
+                              type: 'red-flag',
+                            }
+                          }}
+                          >
+                            Edit
+                          </Link>
+                        )
                     }
                     {' | '}
                     {
@@ -80,7 +94,7 @@ class RedFlagTable extends Component {
                             }
                           }}
                           >
-                          Delete
+                            Delete
                           </Link>
                         )
                     }

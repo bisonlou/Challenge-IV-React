@@ -10,7 +10,7 @@ import { Redirect } from 'react-router-dom';
 // components
 import Loader from '../Loader';
 import NavBar from '../Navbar';
-import { postIncident } from '../../actions/incidentActions';
+import { postIncident, updateIncident } from '../../actions/incidentActions';
 
 
 class Incident extends Component {
@@ -18,17 +18,25 @@ class Incident extends Component {
     super(props);
 
     this.state = {
+      id: 0,
       title: '',
       comment: '',
       lat: 0.000000,
       lng: 0.000000,
       type: '',
+      status: 'pending',
     };
   }
 
   componentDidMount() {
-    const { location: { state: type } } = this.props;
-    this.setState({ type });
+    const { location: { state } } = this.props;
+    const {
+      type, id, title, comment, status,
+    } = state;
+
+    this.setState({
+      id, type, title, comment, status,
+    });
   }
 
   handleChange = (e) => {
@@ -45,13 +53,15 @@ class Incident extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { postIncident } = this.props;
-    postIncident(this.state);
+    const { postIncident, updateIncident } = this.props;
+    const { id } = this.state;
+
+    id === 0 ? postIncident(this.state) : updateIncident(this.state);
   };
 
   render() {
     const { title, comment, location } = this.state;
-    const { isLoading, isIncidentPosted } = this.props;
+    const { isLoading, isIncidentPosted, isIncidentUpdated } = this.props;
 
     return (
       <div>
@@ -60,6 +70,9 @@ class Incident extends Component {
         }
         {
           isIncidentPosted && <Redirect to="/home" />
+        }
+        {
+          isIncidentUpdated && <Redirect to="/home" />
         }
         <NavBar />
         <div className="container">
@@ -137,19 +150,29 @@ const mapStateToProps = state => state.incidentReducer;
 
 Incident.propTypes = {
   postIncident: PropTypes.func,
+  updateIncident: PropTypes.func,
   isLoading: PropTypes.bool,
   isIncidentPosted: PropTypes.bool,
+  isIncidentUpdated: PropTypes.bool,
   location: PropTypes.shape({
     state: PropTypes.shape({
-      type: PropTypes.string
+      type: PropTypes.string,
+      id: PropTypes.number,
+      title: PropTypes.string,
+      comment: PropTypes.string,
+      lat: PropTypes.number,
+      lng: PropTypes.number,
+      status: PropTypes.string,
     })
   }).isRequired,
 };
 
 Incident.defaultProps = {
   postIncident: () => {},
+  updateIncident: () => {},
   isLoading: false,
   isIncidentPosted: false,
+  isIncidentUpdated: false,
 };
 
-export default connect(mapStateToProps, { postIncident })(Incident);
+export default connect(mapStateToProps, { postIncident, updateIncident })(Incident);

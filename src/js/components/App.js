@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 // components
-import Home from './Home';
 import Login from './Login';
-import Landing from './Landing';
+import Home from './Home';
 import SignUp from './Signup';
+import Landing from './Landing';
 import Incident from './Incident';
 import DeleteIncident from './IncidentDelete';
 

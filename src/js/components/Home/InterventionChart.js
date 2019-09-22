@@ -24,7 +24,7 @@ const InterventionChart = (props) => {
           id="pending-interventions"
           title="Pending"
           style={
-            { height: (pending * 100) / total }
+            { height: (pending * 100) / (total === 0 ? 1 : total) }
           }
         />
       </li>
@@ -34,7 +34,7 @@ const InterventionChart = (props) => {
           id="investigation-interventions"
           title="Investigating"
           style={
-            { height: (investigation * 100) / total }
+            { height: (investigation * 100) / (total === 0 ? 1 : total) }
           }
         />
       </li>
@@ -44,7 +44,7 @@ const InterventionChart = (props) => {
           id="resolved-interventions"
           title="Resolved"
           style={
-            { height: (resolved * 100) / total }
+            { height: (resolved * 100) / (total === 0 ? 1 : total) }
           }
         />
       </li>
@@ -54,7 +54,7 @@ const InterventionChart = (props) => {
           id="rejected-interventions"
           title="Rejected"
           style={
-            { height: (rejected * 100) / total }
+            { height: (rejected * 100) / (total === 0 ? 1 : total) }
           }
         />
       </li>
@@ -64,22 +64,13 @@ const InterventionChart = (props) => {
 
 InterventionChart.propTypes = {
   totals: PropTypes.shape({
-    pending: PropTypes.number,
-    rejected: PropTypes.number,
-    resolved: PropTypes.number,
-    investigation: PropTypes.number,
-    total: PropTypes.number,
-  }),
+    pending: PropTypes.number.isRequired,
+    rejected: PropTypes.number.isRequired,
+    resolved: PropTypes.number.isRequired,
+    investigation: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
-InterventionChart.defaultProps = {
-  totals: {
-    pending: 0,
-    rejected: 0,
-    resolved: 0,
-    investigation: 0,
-    total: 0,
-  },
-};
 
 export default InterventionChart;
