@@ -8,7 +8,7 @@ Ireporter is a community tool for eradicating corruption and ineffectiveness in 
 
 ---
 ## Link to the app
-Click [here](https://challenge-iv-react-pr-10.herokuapp.com/home) to go to the app.
+Click [here](https://challenge-iv-react.herokuapp.com/) to go to the app.
 
 ## How to setup project
 * Fork project at [here](https://github.com/bisonlou/Challenge-IV-React)
